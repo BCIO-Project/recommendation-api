@@ -1,0 +1,20 @@
+runtime: nodejs12
+service: {{SERVICE}}
+
+instance_class: F1
+automatic_scaling:
+  max_instances: 200
+  max_concurrent_requests: 80
+  target_cpu_utilization: 0.9
+  max_pending_latency: 400ms
+  min_pending_latency: 200ms
+  max_idle_instances: 3
+
+vpc_access_connector:
+  name: "projects/{{GCP_PROJECT_ID}}/locations/{{GCP_LOCATION}}/connectors/vpc-redis"
+
+env_variables:
+  NODE_ENV: '{{ENVIROMENT}}'
+  REDIS_HOST: '{{REDIS_HOST}}'
+  REDIS_PORT: '{{REDIS_PORT}}'
+  PROJECT_ID: '{{GCP_PROJECT_ID}}'
